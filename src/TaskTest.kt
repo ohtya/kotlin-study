@@ -19,4 +19,9 @@ class TaskTest {
             joinOptions(listOf("yes", "no", "may be"))
         )
     }
+
+    @Test
+    fun testDefaultAndNamedParams() {
+        assertEquals(listOf("a42", "b1", "C42", "D2"), useFoo())
+    }
 }
