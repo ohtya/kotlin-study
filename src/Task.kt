@@ -37,3 +37,19 @@ fun getPattern(): String = """\d{2} $month \d{4}"""
 data class Person(val name: String, val age: Int = 0)
 
 fun getPeople(): List<Person> = listOf(Person("Alice", 29), Person("Bob", 31))
+
+fun sendMessageToClient(client: Client?, message: String?, mailer: Mailer) {
+    client ?: return
+    message ?: return
+    client.personalInfo?.let { personalInfo ->
+        personalInfo.email?.let { email ->
+            mailer.sendMessage(email, message)
+        }
+    }
+}
+
+class Client(val personalInfo: PersonalInfo?)
+class PersonalInfo(val email: String?)
+interface Mailer {
+    fun sendMessage(email: String, message: String)
+}

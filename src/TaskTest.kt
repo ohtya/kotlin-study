@@ -61,4 +61,52 @@ class TaskTest {
     fun testListOfPeople() {
         assertEquals("[Person(name=Alice, age=29), Person(name=Bob, age=31)]", getPeople().toString())
     }
+
+    private fun testSendMessageToClient(
+        client: Client?,
+        message: String?,
+        expectedEmail: String? = null,
+        shouldBeInvoked: Boolean = false
+    ) {
+        var invoked = false
+        val expectedMessage = message
+        sendMessageToClient(client, message, object : Mailer {
+            override fun sendMessage(email: String, message: String) {
+                invoked = true
+                assertEquals(expectedMessage, message)
+                assertEquals(expectedEmail, email)
+            }
+        })
+        assertEquals(shouldBeInvoked, invoked)
+    }
+
+    @Test
+    fun everythingIsOk() {
+        testSendMessageToClient(
+            Client(PersonalInfo("bob@gmail.com")),
+            "Hi Bob! We have an awesome proposition for you...",
+            "bob@gmail.com",
+            true
+        )
+    }
+
+    @Test
+    fun noMessage() {
+        testSendMessageToClient(Client(PersonalInfo("bob@gmail.com")), null)
+    }
+
+    @Test
+    fun noEmail() {
+        testSendMessageToClient(Client(PersonalInfo(null)), "Hi Bob! We have an awesome proposition for you...")
+    }
+
+    @Test
+    fun noPersonalInfo() {
+        testSendMessageToClient(Client(null), "Hi Bob! We have an awesome proposition for you...")
+    }
+
+    @Test
+    fun noClient() {
+        testSendMessageToClient(null, "Hi Bob! We have an awesome proposition for you...")
+    }
 }
