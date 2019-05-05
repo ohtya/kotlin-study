@@ -165,6 +165,7 @@ class TaskTest {
 
     /**
      * Object expressions.
+     * SAM conversions.
      */
     @Test
     fun testSort() {

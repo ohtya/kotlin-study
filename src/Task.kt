@@ -102,6 +102,7 @@ data class RationalNumber(val numerator: Int, val denominator: Int)
 
 /**
  * Object expressions.
+ * SAM conversions.
  */
 fun getList(): List<Int> {
     val arrayList = arrayListOf(1, 5, 2)
@@ -112,3 +113,4 @@ fun getList(): List<Int> {
     arrayList.sortWith(Comparator { x, y -> y - x })
     return arrayList
 }
+
