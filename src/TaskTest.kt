@@ -1,5 +1,7 @@
+import org.junit.jupiter.api.Assertions.assertFalse
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 
 class TaskTest {
     @Test
@@ -23,5 +25,12 @@ class TaskTest {
     @Test
     fun testDefaultAndNamedParams() {
         assertEquals(listOf("a42", "b1", "C42", "D2"), useFoo())
+    }
+
+    @Test
+    fun notContains() {
+        assertFalse(
+            containsEven(listOf(43, 33))
+        )
     }
 }

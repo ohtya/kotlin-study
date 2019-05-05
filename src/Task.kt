@@ -27,3 +27,5 @@ fun useFoo() = listOf(
     foo("c", toUpperCase = true),
     foo(name = "d", number = 2, toUpperCase = true)
 )
+
+fun containsEven(collection: Collection<Int>): Boolean = collection.any { it % 2 == 0 }
