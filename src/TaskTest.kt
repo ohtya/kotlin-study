@@ -56,4 +56,9 @@ class TaskTest {
     fun doNotMatch() {
         testMismatch("24 RRR 1957")
     }
+
+    @Test
+    fun testListOfPeople() {
+        assertEquals("[Person(name=Alice, age=29), Person(name=Bob, age=31)]", getPeople().toString())
+    }
 }

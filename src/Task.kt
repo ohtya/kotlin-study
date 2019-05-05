@@ -33,3 +33,7 @@ fun containsEven(collection: Collection<Int>): Boolean = collection.any { it % 2
 const val month = "(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)"
 
 fun getPattern(): String = """\d{2} $month \d{4}"""
+
+data class Person(val name: String, val age: Int = 0)
+
+fun getPeople(): List<Person> = listOf(Person("Alice", 29), Person("Bob", 31))
