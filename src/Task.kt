@@ -1,5 +1,11 @@
+/**
+ * Hello, world!
+ */
 fun start(): String = "OK"
 
+/**
+ * Java to Kotlin conversion.
+ */
 fun toJSON(collection: Collection<Int>): String {
 
     var json = "["
@@ -16,6 +22,9 @@ fun toJSON(collection: Collection<Int>): String {
     return json
 }
 
+/**
+ * Named arguments.
+ */
 fun joinOptions(options: Collection<String>) = options.joinToString(", ", "[", "]")
 
 fun foo(name: String, number: Int = 42, toUpperCase: Boolean = false) =
@@ -28,16 +37,28 @@ fun useFoo() = listOf(
     foo(name = "d", number = 2, toUpperCase = true)
 )
 
+/**
+ * Lambdas.
+ */
 fun containsEven(collection: Collection<Int>): Boolean = collection.any { it % 2 == 0 }
 
+/**
+ * Strings.
+ */
 const val month = "(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)"
 
 fun getPattern(): String = """\d{2} $month \d{4}"""
 
+/**
+ * Data classes.
+ */
 data class Person(val name: String, val age: Int = 0)
 
 fun getPeople(): List<Person> = listOf(Person("Alice", 29), Person("Bob", 31))
 
+/**
+ * Nullable types.
+ */
 fun sendMessageToClient(client: Client?, message: String?, mailer: Mailer) {
     client ?: return
     message ?: return
@@ -53,3 +74,5 @@ class PersonalInfo(val email: String?)
 interface Mailer {
     fun sendMessage(email: String, message: String)
 }
+
+

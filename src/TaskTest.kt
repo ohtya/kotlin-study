@@ -4,16 +4,25 @@ import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
 class TaskTest {
+    /**
+     * Hello, world!
+     */
     @Test
     fun startOk() {
         assertEquals("OK", start())
     }
 
+    /**
+     * Java to Kotlin conversion.
+     */
     @Test
     fun collection() {
         assertEquals("[1, 2, 3, 42, 555]", toJSON(listOf(1, 2, 3, 42, 555)))
     }
 
+    /**
+     * Named arguments.
+     */
     @Test
     fun testJoinToString() {
         assertEquals(
@@ -27,6 +36,9 @@ class TaskTest {
         assertEquals(listOf("a42", "b1", "C42", "D2"), useFoo())
     }
 
+    /**
+     * Lambdas.
+     */
     @Test
     fun contains() {
         assertTrue(containsEven(listOf(1, 2, 3, 126, 555)))
@@ -39,6 +51,9 @@ class TaskTest {
         )
     }
 
+    /**
+     * Strings.
+     */
     private fun testMatch(date: String) = assertTrue(date.matches(getPattern().toRegex()))
     private fun testMismatch(date: String) = assertFalse(date.matches(getPattern().toRegex()))
 
@@ -57,11 +72,17 @@ class TaskTest {
         testMismatch("24 RRR 1957")
     }
 
+    /**
+     * Data classes.
+     */
     @Test
     fun testListOfPeople() {
         assertEquals("[Person(name=Alice, age=29), Person(name=Bob, age=31)]", getPeople().toString())
     }
 
+    /**
+     * Nullable types.
+     */
     private fun testSendMessageToClient(
         client: Client?,
         message: String?,
