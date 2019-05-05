@@ -11,4 +11,12 @@ class TaskTest {
     fun collection() {
         assertEquals("[1, 2, 3, 42, 555]", toJSON(listOf(1, 2, 3, 42, 555)))
     }
+
+    @Test
+    fun testJoinToString() {
+        assertEquals(
+            "[yes, no, may be]",
+            joinOptions(listOf("yes", "no", "may be"))
+        )
+    }
 }
