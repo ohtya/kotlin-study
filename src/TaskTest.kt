@@ -137,7 +137,7 @@ class TaskTest {
      */
     @Test
     fun testNum() {
-        assertEquals( 2, eval(Num(2)))
+        assertEquals(2, eval(Num(2)))
     }
 
     @Test
@@ -148,5 +148,18 @@ class TaskTest {
     @Test
     fun testRecursion() {
         assertEquals(6, eval(Sum(Sum(Num(1), Num(2)), Num(3))))
+    }
+
+    /**
+     * Extension functions.
+     */
+    @Test
+    fun testIntExtension() {
+        assertEquals(RationalNumber(4, 1), 4.r())
+    }
+
+    @Test
+    fun testPairExtension() {
+        assertEquals(RationalNumber(2, 3), Pair(2, 3).r())
     }
 }
