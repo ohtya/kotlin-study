@@ -55,6 +55,7 @@ class TaskTest {
      * Strings.
      */
     private fun testMatch(date: String) = assertTrue(date.matches(getPattern().toRegex()))
+
     private fun testMismatch(date: String) = assertFalse(date.matches(getPattern().toRegex()))
 
     @Test
@@ -129,5 +130,23 @@ class TaskTest {
     @Test
     fun noClient() {
         testSendMessageToClient(null, "Hi Bob! We have an awesome proposition for you...")
+    }
+
+    /**
+     * Smart casts.
+     */
+    @Test
+    fun testNum() {
+        assertEquals( 2, eval(Num(2)))
+    }
+
+    @Test
+    fun testSum() {
+        assertEquals(3, eval(Sum(Num(2), Num(1))))
+    }
+
+    @Test
+    fun testRecursion() {
+        assertEquals(6, eval(Sum(Sum(Num(1), Num(2)), Num(3))))
     }
 }
