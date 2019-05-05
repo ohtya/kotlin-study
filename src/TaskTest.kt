@@ -1,7 +1,7 @@
 import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
-import kotlin.test.assertFalse
 
 class TaskTest {
     @Test
@@ -28,9 +28,32 @@ class TaskTest {
     }
 
     @Test
+    fun contains() {
+        assertTrue(containsEven(listOf(1, 2, 3, 126, 555)))
+    }
+
+    @Test
     fun notContains() {
         assertFalse(
             containsEven(listOf(43, 33))
         )
+    }
+
+    private fun testMatch(date: String) = assertTrue(date.matches(getPattern().toRegex()))
+    private fun testMismatch(date: String) = assertFalse(date.matches(getPattern().toRegex()))
+
+    @Test
+    fun match() {
+        testMatch("11 MAR 1952")
+    }
+
+    @Test
+    fun match1() {
+        testMatch("24 AUG 1957")
+    }
+
+    @Test
+    fun doNotMatch() {
+        testMismatch("24 RRR 1957")
     }
 }

@@ -29,3 +29,7 @@ fun useFoo() = listOf(
 )
 
 fun containsEven(collection: Collection<Int>): Boolean = collection.any { it % 2 == 0 }
+
+const val month = "(JAN|FEB|MAR|APR|MAY|JUN|JUL|AUG|SEP|OCT|NOV|DEC)"
+
+fun getPattern(): String = """\d{2} $month \d{4}"""
