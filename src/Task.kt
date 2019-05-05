@@ -1,5 +1,3 @@
-import java.util.*
-
 /**
  * Hello, world!
  */
@@ -103,14 +101,22 @@ data class RationalNumber(val numerator: Int, val denominator: Int)
 /**
  * Object expressions.
  * SAM conversions.
+ * Extension functions on collections.
  */
 fun getList(): List<Int> {
     val arrayList = arrayListOf(1, 5, 2)
+
+//    Object expressions.
 //    Collections.sort(arrayList, object : Comparator<Int> {
 //        override fun compare(x: Int, y: Int): Int = x - y
 //    })
 //    return arrayList
-    arrayList.sortWith(Comparator { x, y -> y - x })
+
+    // SAM conversions.
+//    arrayList.sortWith(Comparator { x, y -> y - x })
+
+    // Extension functions on collections.
+    arrayList.sortDescending()
     return arrayList
 }
 
