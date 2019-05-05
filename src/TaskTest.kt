@@ -162,4 +162,12 @@ class TaskTest {
     fun testPairExtension() {
         assertEquals(RationalNumber(2, 3), Pair(2, 3).r())
     }
+
+    /**
+     * Object expressions.
+     */
+    @Test
+    fun testSort() {
+        assertEquals(listOf(5, 2, 1), getList())
+    }
 }
