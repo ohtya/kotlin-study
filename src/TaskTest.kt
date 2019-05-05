@@ -172,4 +172,22 @@ class TaskTest {
     fun testSort() {
         assertEquals(listOf(5, 2, 1), getList())
     }
+
+
+    /**
+     * Comparison.
+     */
+    @Test
+    fun testBefore() {
+        val first = MyDate(2014, 5, 10)
+        val second = MyDate(2014, 7, 11)
+        assertTrue(first < second)
+    }
+
+    @Test
+    fun testAfter() {
+        val first = MyDate(2014, 10, 20)
+        val second = MyDate(2014, 7, 11)
+        assertTrue(first > second)
+    }
 }
