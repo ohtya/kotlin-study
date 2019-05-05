@@ -6,4 +6,9 @@ class TaskTest {
     fun startOk() {
         assertEquals("OK", start())
     }
+
+    @Test
+    fun collection() {
+        assertEquals("[1, 2, 3, 42, 555]", toJSON(listOf(1, 2, 3, 42, 555)))
+    }
 }
