@@ -1,15 +1,19 @@
-import org.junit.jupiter.api.Assertions.assertFalse
-import org.junit.jupiter.api.Assertions.assertTrue
+package study
+
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import kotlin.test.assertEquals
 
 class TaskTest {
+
+    private var task: Task = Task()
+
     /**
      * Hello, world!
      */
     @Test
     fun startOk() {
-        assertEquals("OK", start())
+        val task = Task()
+        assertEquals("OK", task.start())
     }
 
     /**
@@ -17,7 +21,7 @@ class TaskTest {
      */
     @Test
     fun collection() {
-        assertEquals("[1, 2, 3, 42, 555]", toJSON(listOf(1, 2, 3, 42, 555)))
+        assertEquals("[1, 2, 3, 42, 555]", task.toJSON(listOf(1, 2, 3, 42, 555)))
     }
 
     /**
@@ -27,13 +31,13 @@ class TaskTest {
     fun testJoinToString() {
         assertEquals(
             "[yes, no, may be]",
-            joinOptions(listOf("yes", "no", "may be"))
+            task.joinOptions(listOf("yes", "no", "may be"))
         )
     }
 
     @Test
     fun testDefaultAndNamedParams() {
-        assertEquals(listOf("a42", "b1", "C42", "D2"), useFoo())
+        assertEquals(listOf("a42", "b1", "C42", "D2"), task.useFoo())
     }
 
     /**
@@ -41,22 +45,22 @@ class TaskTest {
      */
     @Test
     fun contains() {
-        assertTrue(containsEven(listOf(1, 2, 3, 126, 555)))
+        assertTrue(task.containsEven(listOf(1, 2, 3, 126, 555)))
     }
 
     @Test
     fun notContains() {
         assertFalse(
-            containsEven(listOf(43, 33))
+            task.containsEven(listOf(43, 33))
         )
     }
 
     /**
      * Strings.
      */
-    private fun testMatch(date: String) = assertTrue(date.matches(getPattern().toRegex()))
+    private fun testMatch(date: String) = assertTrue(date.matches(task.getPattern().toRegex()))
 
-    private fun testMismatch(date: String) = assertFalse(date.matches(getPattern().toRegex()))
+    private fun testMismatch(date: String) = assertFalse(date.matches(task.getPattern().toRegex()))
 
     @Test
     fun match() {
@@ -78,21 +82,21 @@ class TaskTest {
      */
     @Test
     fun testListOfPeople() {
-        assertEquals("[Person(name=Alice, age=29), Person(name=Bob, age=31)]", getPeople().toString())
+        assertEquals("[Person(name=Alice, age=29), Person(name=Bob, age=31)]", task.getPeople().toString())
     }
 
     /**
      * Nullable types.
      */
     private fun testSendMessageToClient(
-        client: Client?,
+        client: Task.Client?,
         message: String?,
         expectedEmail: String? = null,
         shouldBeInvoked: Boolean = false
     ) {
         var invoked = false
         val expectedMessage = message
-        sendMessageToClient(client, message, object : Mailer {
+        task.sendMessageToClient(client, message, object : Task.Mailer {
             override fun sendMessage(email: String, message: String) {
                 invoked = true
                 assertEquals(expectedMessage, message)
@@ -105,7 +109,7 @@ class TaskTest {
     @Test
     fun everythingIsOk() {
         testSendMessageToClient(
-            Client(PersonalInfo("bob@gmail.com")),
+            Task.Client(Task.PersonalInfo("bob@gmail.com")),
             "Hi Bob! We have an awesome proposition for you...",
             "bob@gmail.com",
             true
@@ -114,17 +118,20 @@ class TaskTest {
 
     @Test
     fun noMessage() {
-        testSendMessageToClient(Client(PersonalInfo("bob@gmail.com")), null)
+        testSendMessageToClient(Task.Client(Task.PersonalInfo("bob@gmail.com")), null)
     }
 
     @Test
     fun noEmail() {
-        testSendMessageToClient(Client(PersonalInfo(null)), "Hi Bob! We have an awesome proposition for you...")
+        testSendMessageToClient(
+            Task.Client(Task.PersonalInfo(null)),
+            "Hi Bob! We have an awesome proposition for you..."
+        )
     }
 
     @Test
     fun noPersonalInfo() {
-        testSendMessageToClient(Client(null), "Hi Bob! We have an awesome proposition for you...")
+        testSendMessageToClient(Task.Client(null), "Hi Bob! We have an awesome proposition for you...")
     }
 
     @Test
@@ -135,33 +142,33 @@ class TaskTest {
     /**
      * Smart casts.
      */
-    @Test
-    fun testNum() {
-        assertEquals(2, eval(Num(2)))
-    }
-
-    @Test
-    fun testSum() {
-        assertEquals(3, eval(Sum(Num(2), Num(1))))
-    }
-
-    @Test
-    fun testRecursion() {
-        assertEquals(6, eval(Sum(Sum(Num(1), Num(2)), Num(3))))
-    }
+//    @Test
+//    fun testNum() {
+//        assertEquals(2, eval(Task.Num(2), "aaa"))
+//    }
+//
+//    @Test
+//    fun testSum() {
+//        assertEquals(3, eval(Task.Sum(Task.Num(2), Task.Num(1)), "aaa"))
+//    }
+//
+//    @Test
+//    fun testRecursion() {
+//        assertEquals(6, eval(Task.Sum(Task.Sum(Task.Num(1), Task.Num(2)), Task.Num(3)), "aaa"))
+//    }
 
     /**
      * Extension functions.
      */
-    @Test
-    fun testIntExtension() {
-        assertEquals(RationalNumber(4, 1), 4.r())
-    }
-
-    @Test
-    fun testPairExtension() {
-        assertEquals(RationalNumber(2, 3), Pair(2, 3).r())
-    }
+//    @Test
+//    fun testIntExtension() {
+//        assertEquals(Task.RationalNumber(4, 1), 4)
+//    }
+//
+//    @Test
+//    fun testPairExtension() {
+//        assertEquals(Task.RationalNumber(2, 3), Pair(2, 3))
+//    }
 
     /**
      * Object expressions.
@@ -170,7 +177,7 @@ class TaskTest {
      */
     @Test
     fun testSort() {
-        assertEquals(listOf(5, 2, 1), getList())
+        assertEquals(listOf(5, 2, 1), task.getList())
     }
 
 
@@ -179,15 +186,15 @@ class TaskTest {
      */
     @Test
     fun testBefore() {
-        val first = MyDate(2014, 5, 10)
-        val second = MyDate(2014, 7, 11)
+        val first = Task.MyDate(2014, 5, 10)
+        val second = Task.MyDate(2014, 7, 11)
         assertTrue(first < second)
     }
 
     @Test
     fun testAfter() {
-        val first = MyDate(2014, 10, 20)
-        val second = MyDate(2014, 7, 11)
+        val first = Task.MyDate(2014, 10, 20)
+        val second = Task.MyDate(2014, 7, 11)
         assertTrue(first > second)
     }
 }
